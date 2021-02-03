@@ -1,6 +1,6 @@
 {
-  "short_name": "CSH React",
-  "name": "CSH React Boilerplate",
+  "short_name": "Rooms",
+  "name": "CSH Rooms",
   "start_url": "./index.html",
   "dir": "auto",
   "display": "standalone",
