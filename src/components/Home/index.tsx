@@ -16,7 +16,7 @@ const Home: React.FunctionComponent = () => {
   return (
     <Container>
       <Row>
-        <Col xs="6">
+        <Col xs="12" lg="6">
           <Card>
             <CardHeader>
               <Row>
@@ -53,7 +53,7 @@ const Home: React.FunctionComponent = () => {
             </ListGroup>
           </Card>
         </Col>
-        <Col xs="6">
+        <Col xs="12" lg="6" className="mt-3">
           <Card>
             <CardHeader>Current Residents</CardHeader>
             <ListGroup flush>
