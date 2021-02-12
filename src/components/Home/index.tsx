@@ -11,6 +11,7 @@ import {
   Table,
 } from "reactstrap";
 import { MemberRow } from "./HouseQueue/MemberRow";
+import { ResidentsList } from "./ResidentsList/ResidentsList";
 
 const Home: React.FunctionComponent = () => {
   return (
@@ -39,9 +40,24 @@ const Home: React.FunctionComponent = () => {
           <Card>
             <CardHeader>Current Residents</CardHeader>
             <ListGroup flush>
-              <ListGroupItem>This is a test</ListGroupItem>
-              <ListGroupItem>This is a test</ListGroupItem>
-              <ListGroupItem>This is a test</ListGroupItem>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Room Number</th>
+                    <th>Residents</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ResidentsList
+                    roomNumber={3013}
+                    residents={["Lonnie Gerol", "Kenny Kim"]}
+                  />
+                  <ResidentsList
+                    roomNumber={3014}
+                    residents={["Adam Neulight", "Josh Greco", "3D Printer"]}
+                  />
+                </tbody>
+              </Table>
             </ListGroup>
           </Card>
         </Col>
