@@ -7,6 +7,7 @@ import {
   Card,
   CardHeader,
   Table,
+  Button,
 } from "reactstrap";
 import { MemberRow } from "./HouseQueue/MemberRow";
 import { ResidentsList } from "./ResidentsList/ResidentsList";
@@ -17,18 +18,36 @@ const Home: React.FunctionComponent = () => {
       <Row>
         <Col xs="6">
           <Card>
-            <CardHeader>Housing Queue</CardHeader>
+            <CardHeader>
+              <Row>
+                <Col>
+                  <p>Housing Queue</p>
+                </Col>
+                <Col className="d-flex flex-row-reverse">
+                  <Button color="primary">Join</Button>
+                </Col>
+              </Row>
+            </CardHeader>
             <ListGroup flush>
               <Table>
                 <thead>
                   <tr>
-                    <th>Member</th>
+                    <th>Name</th>
                     <th>Housing Points</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <MemberRow name="Lonnie Gerol" points={420} />
-                  <MemberRow name="Max Meinhold" points={69} />
+                  <MemberRow
+                    name="Lonnie Gerol"
+                    username="Lontronix"
+                    points={420}
+                  />
+                  <MemberRow name="Max Meinhold" username="Mom" points={69} />
+                  <MemberRow
+                    name="This is a long name"
+                    username="Thisisanevenlongerusername"
+                    points={69}
+                  />
                 </tbody>
               </Table>
             </ListGroup>
@@ -48,11 +67,17 @@ const Home: React.FunctionComponent = () => {
                 <tbody>
                   <ResidentsList
                     roomNumber={3013}
-                    residents={["Lonnie Gerol", "Kenny Kim"]}
+                    residents={[
+                      "Lonnie Gerol (lontronix)",
+                      "Kenny Kim (hitchhacker)",
+                    ]}
                   />
                   <ResidentsList
                     roomNumber={3014}
-                    residents={["Adam Neulight", "Josh Greco", "3D Printer"]}
+                    residents={[
+                      "Adam Neulight (boneless)",
+                      "Josh Greco (josh)",
+                    ]}
                   />
                 </tbody>
               </Table>
