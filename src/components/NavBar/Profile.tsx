@@ -31,8 +31,8 @@ const Profile: React.FunctionComponent = () => {
         <span className="caret" />
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem>Dashboard</DropdownItem>
-        <DropdownItem>Settings</DropdownItem>
+        <DropdownItem>Profile</DropdownItem>
+        <DropdownItem>Themes</DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={() => logout()}>Logout</DropdownItem>
       </DropdownMenu>
