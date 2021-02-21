@@ -3,4 +3,5 @@ disable =
     no-member,
     unnecessary-pass,
     relative-beyond-top-level,
-    empty-docstring
+    empty-docstring,
+    missing-module-docstring
