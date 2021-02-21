@@ -9,9 +9,10 @@ from . import APP
 
 room_numbers = ['3009', '3013', '3016', '3020',
                 '3050', '3051', '3054', '3055',
-                '3063', '3067', '3070', '3071',
-                '3086', '3090', '3094', '3103',
-                '3106', '3110', '3111', '3126' ]
+                '3059', '3063', '3066', '3067', 
+                '3070', '3071', '3086', '3090', 
+                '3094', '3103', '3106', '3110', 
+                '3111', '3126']
 
 @dataclass
 class Resident:
@@ -21,6 +22,7 @@ class Resident:
     username: str
     room_number: str
     housing_points: int
+    full_name: str
 
 class LDAPManager:
     """
@@ -47,14 +49,15 @@ class LDAPManager:
         Returns a dictionary with room numbers mapped to a list of Resident objects
         """
         query = f'(&(memberOf=cn=onfloor,cn=groups,{self.__base_ou__})(memberOf=cn=current_student,cn=groups,{self.__base_ou__})(roomnumber=*))'
-        residents = self.__con__.search_s(self.__ldap_users_ou__, ldap.SCOPE_SUBTREE, query, ['uid', 'housingpoints', 'roomnumber'])
+        residents = self.__con__.search_s(self.__ldap_users_ou__, ldap.SCOPE_SUBTREE, query, ['uid', 'housingpoints', 'roomnumber', 'gecos'])
         room_assignments = { num: [] for num in room_numbers }
         for resident in residents:
             res_info = resident[1]
             uid = res_info['uid'][0].decode('utf-8')
-            room_number = res_info['roomnumer'][0].decode('utf-8')
+            room_number = res_info['roomnumber'][0].decode('utf-8')
             housing_points = res_info['housingpoints'][0].decode('utf-8')
-            room_assignments[res_info[room_number]] = Resident(uid, room_number, housing_points)
+            full_name = res_info['gecos'][0].decode('utf-8')
+            room_assignments[room_number].append(Resident(uid, room_number, housing_points, full_name))
         return room_assignments
 
     def fetch_house_points(self, uid):
