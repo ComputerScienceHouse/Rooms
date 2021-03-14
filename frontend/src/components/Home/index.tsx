@@ -11,48 +11,63 @@ import {
 } from "reactstrap";
 import { MemberRow } from "./HouseQueue/MemberRow";
 import { ResidentsList } from "./ResidentsList/ResidentsList";
+import { useMembers } from "../../model/member";
 
 const Home: React.FunctionComponent = () => {
+  const { isLoading, members } = useMembers();
+  const memberList = members
+    ?.sort((obj1, obj2) => {
+      if (obj1.points < obj2.points) {
+        return 1;
+      }
+
+      if (obj1.points > obj2.points) {
+        return -1;
+      }
+      return 0;
+    })
+    .map((member) => {
+      return (
+        <MemberRow
+          name={member.name}
+          username={member.username}
+          points={member.points}
+        />
+      );
+    });
+
   return (
     <Container>
       <Row>
-        <Col xs="12" lg="6">
-          <Card>
-            <CardHeader>
-              <Row>
-                <Col>
-                  <p>Housing Queue</p>
-                </Col>
-                <Col className="d-flex flex-row-reverse">
-                  <Button color="primary">Join</Button>
-                </Col>
-              </Row>
-            </CardHeader>
-            <ListGroup flush>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Housing Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <MemberRow
-                    name="Lonnie Gerol"
-                    username="Lontronix"
-                    points={420}
-                  />
-                  <MemberRow name="Max Meinhold" username="Mom" points={69} />
-                  <MemberRow
-                    name="This is a long name"
-                    username="Thisisanevenlongerusername"
-                    points={69}
-                  />
-                </tbody>
-              </Table>
-            </ListGroup>
-          </Card>
-        </Col>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Col xs="12" lg="6">
+            <Card>
+              <CardHeader>
+                <Row>
+                  <Col>
+                    <p>Housing Queue</p>
+                  </Col>
+                  <Col className="d-flex flex-row-reverse">
+                    <Button color="primary">Join</Button>
+                  </Col>
+                </Row>
+              </CardHeader>
+              <ListGroup flush>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Housing Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>{memberList}</tbody>
+                </Table>
+              </ListGroup>
+            </Card>
+          </Col>
+        )}
         <Col xs="12" lg="6" className="mt-3">
           <Card>
             <CardHeader>Current Residents</CardHeader>
