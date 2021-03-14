@@ -1,20 +1,23 @@
-from server import APP
+from backend import APP
 from flask import Flask
+from .ldap_wrapper import LDAPManager
 
 # Rooms
-@App.route('/api/v1/rooms', methods=['GET'])
+@APP.route('/api/v1/rooms', methods=['GET'])
 def fetch_rooms():
-    pass
+    manager = LDAPManager()
+    residents = manager.get_live_onfloor()
+    return residents 
 
-@App.route('api/v1/room/<room_number>/<uid>', methods=['DELETE'])
+@APP.route('/api/v1/room/<room_number>/<uid>', methods=['DELETE'])
 def remove_occupant(room_number, uid):
     pass 
 
 # Housing Queue
-@App.route('/api/v1/queue', methods=['GET', 'POST'])
+@APP.route('/api/v1/queue', methods=['GET', 'POST'])
 def fetch_queue():
     pass
 
-@App.route('/api/v1/queue/<uid>')
+@APP.route('/api/v1/queue/<uid>')
 def remove_member(uid):
     pass

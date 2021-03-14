@@ -16,6 +16,7 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+config.py
 
 # Package Management
 npm-debug.log*
@@ -24,4 +25,5 @@ yarn-error.log*
 **/node_modules/
 
 # Python
-venv
+venv/
+__pycache__/
