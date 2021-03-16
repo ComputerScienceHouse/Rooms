@@ -1,5 +1,7 @@
 # Rooms Backend
 
+The database schema for CSH Rooms can be found [here](https://dbdiagram.io/d/60502ac1fcdcb6230b245391)
+
 ## Python dependencies
 Use ```pip3 install -r requirements.txt``` to install the required python dependencies. A venv is highly recommended.
 
