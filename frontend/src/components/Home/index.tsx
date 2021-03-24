@@ -12,6 +12,7 @@ import {
 import { MemberRow } from "./HouseQueue/MemberRow";
 import { ResidentsList } from "./ResidentsList/ResidentsList";
 import { useMembers } from "../../model/member";
+import { useRooms } from "../../model/room";
 
 const Home: React.FunctionComponent = () => {
   const { isLoading, members } = useMembers();
@@ -35,6 +36,11 @@ const Home: React.FunctionComponent = () => {
         />
       );
     });
+
+  const { roomsIsLoading, rooms } = useRooms();
+  const roomsList = rooms?.map((room) => {
+    return <ResidentsList roomNumber={room.room} residents={room.residents} />;
+  });
 
   return (
     <Container>
@@ -79,22 +85,7 @@ const Home: React.FunctionComponent = () => {
                     <th>Residents</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <ResidentsList
-                    roomNumber={3013}
-                    residents={[
-                      "Lonnie Gerol (lontronix)",
-                      "Kenny Kim (hitchhacker)",
-                    ]}
-                  />
-                  <ResidentsList
-                    roomNumber={3014}
-                    residents={[
-                      "Adam Neulight (boneless)",
-                      "Josh Greco (josh)",
-                    ]}
-                  />
-                </tbody>
+                <tbody>{roomsList}</tbody>
               </Table>
             </ListGroup>
           </Card>

@@ -1,6 +1,8 @@
+import { Resident } from "../../../model/types/resident";
+
 type ResidentsListProps = {
   roomNumber: number;
-  residents: Array<String>;
+  residents: Array<Resident>;
 };
 
 export const ResidentsList = ({
@@ -11,8 +13,10 @@ export const ResidentsList = ({
     <th>{roomNumber}</th>
     <td>
       <ul className="list-unstyled">
-        {residents.map((name) => (
-          <li>{name}</li>
+        {residents.map((resident) => (
+          <li>
+            {resident.name} ({resident.username})
+          </li>
         ))}
       </ul>
     </td>
